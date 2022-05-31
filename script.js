@@ -26,16 +26,11 @@ function playRound(playerSelection, computerSelection) {
       case (playerSelection == 'paper' && computerSelection == 'scissors'):
       case (playerSelection == 'scissors' && computerSelection == 'rock'):
         return `You chose ${playerSelection} whilst computer chose ${computerSelection}...you lost!`;
-        break;
-  
-      case (playerSelection == 'rock' && computerSelection == 'scissors'):
-      case (playerSelection == 'paper' && computerSelection == 'rock'):
-      case (playerSelection == 'scissors' && computerSelection == 'paper'):
-        return `You chose ${playerSelection} whilst computer chose ${computerSelection}...you won!`;
-        break;
+        break; 
   
       default:
-        return "Somethings gone terribly wrong, oh dear...";
+        
+        return `You chose ${playerSelection} whilst computer chose ${computerSelection}...you won!`;
     }
   }
 }
@@ -43,12 +38,13 @@ function playRound(playerSelection, computerSelection) {
 function game() {
   let playerScore = 0;
   let computerScore = 0;
-  for (i=0; i<5; i++) {
+  play: for (i=0; i<5; i++) {
 
     playerSelection = prompt('choose between rock, paper and scissors');
     playerSelection = playerSelection.toLowerCase();
     if (playerSelection != 'rock' && playerSelection != 'paper' && playerSelection != 'scissors') {
       i--;
+      continue play;
     }
     computerSelection = computerPlay()
     console.log(playRound(playerSelection,computerSelection));
@@ -65,16 +61,12 @@ function game() {
         computerScore +=1;
         break;
 
-      case (playerSelection == 'rock' && computerSelection == 'scissors'):
-      case (playerSelection == 'paper' && computerSelection == 'rock'):
-      case (playerSelection == 'scissors' && computerSelection == 'paper'):
-        playerScore +=1;
-        break;
-
       default:
-        break;
+        playerScore +=1;
+        
     }
-  
+  console.log(`Player: ${playerScore}`);
+  console.log(`Computer: ${computerScore}` );
   
   }
  
@@ -82,4 +74,3 @@ function game() {
   else if (playerScore > computerScore) return `You won`;
   else return 'You lost';
 }
-
